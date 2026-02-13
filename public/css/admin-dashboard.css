@@ -1,0 +1,27 @@
+/* Admin Dashboard Custom CSS */
+#sidebar-wrapper {
+    transition: width 0.2s;
+    overflow-y: auto;
+}
+#sidebar-wrapper.collapsed {
+    width: 60px !important;
+}
+#sidebar-wrapper .nav-link {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+#sidebar-wrapper .nav-link i {
+    width: 24px;
+    text-align: center;
+}
+#page-content-wrapper {
+    transition: margin-left 0.2s;
+}
+@media (max-width: 768px) {
+    #sidebar-wrapper {
+        position: absolute;
+        z-index: 1040;
+        height: 100vh;
+    }
+}

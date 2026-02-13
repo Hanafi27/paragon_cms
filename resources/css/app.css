@@ -1,0 +1,238 @@
+
+@import './animations.css';
+
+/* 3D Card Hover Animation */
+.card-3d-hover {
+    transition: transform 0.35s cubic-bezier(.22,1,.36,1), box-shadow 0.35s cubic-bezier(.22,1,.36,1);
+    will-change: transform, box-shadow;
+    box-shadow: 0 2px 8px 0 rgba(168,29,93,0.06);
+}
+.card-3d-hover:hover {
+    transform: perspective(700px) scale(1.045) rotateY(7deg) rotateX(2deg) translateY(-4px);
+    box-shadow: 0 8px 32px 0 rgba(168,29,93,0.18);
+    z-index: 2;
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+    scroll-behavior: smooth;
+    width: 100%;
+    overflow-x: hidden;
+}
+
+body {
+    width: 100%;
+    overflow-x: hidden;
+}
+
+/* Section scroll offset untuk navbar sticky */
+section[id] {
+    scroll-margin-top: 50px;
+}
+
+/* Pastikan main tidak punya padding/margin yang tidak perlu */
+main {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    overflow-x: hidden;
+}
+
+@layer base {
+    body {
+        @apply text-primary bg-neutral-light;
+        margin: 0;
+        padding: 0;
+    }
+    
+    h1, h2, h3, h4, h5, h6 {
+        @apply font-heading text-primary;
+    }
+}
+
+@layer components {
+    /* Button Primary - Magenta Accent */
+    .btn-primary {
+        @apply px-6 py-3 bg-accent text-white rounded transition-all duration-300;
+        border-radius: 6px;
+    }
+    
+    .btn-primary:hover {
+        @apply bg-accent-dark;
+    }
+    
+    /* Button Secondary - Transparent dengan border */
+    .btn-secondary {
+        @apply px-6 py-3 bg-transparent border border-primary text-primary font-medium rounded transition-all duration-300;
+        border-radius: 6px;
+    }
+    
+    .btn-secondary:hover {
+        @apply bg-primary text-white;
+    }
+    
+    /* Button Accent - Yellow untuk highlight */
+    .btn-accent-yellow {
+        @apply px-6 py-3 bg-accent-yellow text-primary font-semibold rounded transition-all duration-300;
+        border-radius: 6px;
+    }
+    
+    .btn-accent-yellow:hover {
+        @apply bg-accent-yellow-dark;
+    }
+    
+    /* Divider line - tipis */
+    .divider {
+        @apply h-px bg-gray-200;
+    }
+    
+    /* Card dengan border radius berbeda */
+    .card {
+        @apply bg-white rounded border border-gray-200;
+    }
+    
+    .card-sm {
+        border-radius: 4px;
+    }
+    
+    .card-md {
+        border-radius: 6px;
+    }
+    
+    .card-lg {
+        border-radius: 8px;
+    }
+    
+    /* Hover effect yang lebih lambat (human-like) */
+    .hover-slow {
+        transition: all 0.3s ease;
+    }
+    
+    /* Text color untuk body - bukan hitam murni */
+    .text-body {
+        @apply text-warm-gray;
+    }
+}
+
+@layer utilities {
+    /* Smooth hamburger menu animations */
+    @keyframes slideDownFade {
+        from {
+            opacity: 0;
+            transform: translateY(-8px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    @keyframes slideUpFade {
+        from {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        to {
+            opacity: 0;
+            transform: translateY(-8px);
+        }
+    }
+
+    @keyframes floatWave {
+        0%, 100% {
+            transform: translateX(0px) translateY(0px);
+        }
+        25% {
+            transform: translateX(-10px) translateY(-5px);
+        }
+        50% {
+            transform: translateX(-20px) translateY(-10px);
+        }
+        75% {
+            transform: translateX(-10px) translateY(-5px);
+        }
+    }
+
+    @keyframes floatImage {
+        0%, 100% {
+            transform: translateY(0px);
+        }
+        50% {
+            transform: translateY(-20px);
+        }
+    }
+
+    .animate-slide-down-fade {
+        animation: slideDownFade 0.3s ease-out forwards;
+    }
+
+    .animate-slide-up-fade {
+        animation: slideUpFade 0.2s ease-in forwards;
+    }
+
+    .animate-wave {
+        animation: floatWave 8s ease-in-out infinite;
+    }
+
+    .animate-float {
+        animation: floatImage 6s ease-in-out infinite;
+    }
+
+    /* Carousel Reviews - Smooth Slide Transition */
+    .carousel-item {
+        opacity: 1;
+        transform: scale(1);
+        transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+    }
+
+    #reviews-carousel {
+        will-change: transform;
+    }
+
+    /* Responsive Carousel */
+    @media (max-width: 768px) {
+        #carousel-wrapper {
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        #carousel-wrapper::-webkit-scrollbar {
+            height: 4px;
+        }
+
+        #carousel-wrapper::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.1);
+        }
+
+        #carousel-wrapper::-webkit-scrollbar-thumb {
+            background: var(--color-accent);
+            border-radius: 2px;
+        }
+    }
+
+    /* Pagination Dots Animation */
+    .carousel-dot {
+        cursor: pointer;
+        width: 0.625rem;
+        height: 0.625rem;
+    }
+
+    .carousel-dot.active {
+        background-color: var(--color-accent);
+        width: 1.5rem;
+    }
+
+    /* Review Card Hover Effect */
+    .review-card {
+        transform: translateZ(0);
+        backface-visibility: hidden;
+    }
+
+    /* .review-card:hover { transform: none; }  -- hover effect removed */
+    .animate-float {
+        animation: floatImage 6s ease-in-out infinite;
+    }
+}
