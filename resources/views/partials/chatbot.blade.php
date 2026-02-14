@@ -557,6 +557,23 @@
                 setTimeout(() => {
                     let responded = false;
                     let matchedIntent = null;
+                    // Tambahkan greeting default
+                    const greetingPatterns = [
+                        { pattern: /\b(pagi|selamat pagi)\b/i, greeting: 'pagi' },
+                        { pattern: /\b(siang|selamat siang)\b/i, greeting: 'siang' },
+                        { pattern: /\b(sore|selamat sore)\b/i, greeting: 'sore' },
+                        { pattern: /\b(malam|selamat malam)\b/i, greeting: 'malam' }
+                    ];
+                    for (const greet of greetingPatterns) {
+                        if (greet.pattern.test(message)) {
+                            const greetMsg = `Selamat ${greet.greeting}, ada yang bisa dibantu?`;
+                            addBotMessage(greetMsg, 'text');
+                            sendMessageToBackend('bot', greetMsg, null);
+                            responded = true;
+                            break;
+                        }
+                    }
+                    if (responded) return;
                     // SHALLOW PARSING: regex pattern matching (hanya untuk pencocokan intent CRUD admin)
                     const shallowPatterns = [
                         // Contoh pola, admin bisa tambah keyword di CRUD FAQ

@@ -27,30 +27,15 @@
                 </h2>
                 <div class="h-1 w-16 bg-accent mx-auto mb-4"></div>
                 <p class="text-neutral max-w-2xl mx-auto leading-body text-sm sm:text-base">
-                    Pilihan produk farmasi berkualitas untuk mendukung pelayanan kesehatan yang lebih baik. Desain minimalis, fokus pada informasi penting.
+                    Pilihan produk berkualitas untuk mendukung pelayanan kesehatan yang lebih baik.
                 </p>
-            </div>
-
-            <div class="flex flex-wrap items-center justify-center gap-2 sm:gap-3 mb-8 sm:mb-12 px-2 sm:px-0">
-                <button type="button" data-filter="all" class="inline-flex items-center px-3 py-1.5 sm:px-4 sm:py-2 rounded-xl border border-accent-soft bg-accent-soft text-primary text-xs sm:text-sm font-medium hover:border-accent hover:text-accent transition-all">
-                    Semua
-                </button>
-                <button type="button" data-filter="obat" class="inline-flex items-center px-3 py-1.5 sm:px-4 sm:py-2 rounded-xl border border-accent-soft bg-accent-soft text-primary text-xs sm:text-sm font-medium hover:border-accent hover:text-accent transition-all">
-                    Obat
-                </button>
-                <button type="button" data-filter="alat" class="inline-flex items-center px-3 py-1.5 sm:px-4 sm:py-2 rounded-xl border border-accent-soft bg-accent-soft text-primary text-xs sm:text-sm font-medium hover:border-accent hover:text-accent transition-all">
-                    Alat Kesehatan
-                </button>
-                <button type="button" data-filter="suplemen" class="inline-flex items-center px-3 py-1.5 sm:px-4 sm:py-2 rounded-xl border border-accent-soft bg-accent-soft text-primary text-xs sm:text-sm font-medium hover:border-accent hover:text-accent transition-all">
-                    Suplemen
-                </button>
             </div>
 
             <div id="product-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 lg:gap-8 mb-0">
                 @php $products = \App\Models\Product::with('galleries')->latest()->get(); @endphp
                 @if($products->count() > 0)
                     @foreach($products as $product)
-                        <div class="bg-neutral-lighter border border-neutral-border rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 flex flex-col h-full min-h-96 animate-stagger">
+                        <div class="bg-neutral-lighter border border-neutral-border rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 flex flex-col h-full min-h-96 animate-stagger" data-product-card>
                             <img src="{{ asset('storage/' . $product->main_image) }}" alt="{{ $product->name }}" class="w-full h-40 object-cover object-center">
                             <div class="p-6 md:p-7 space-y-4 flex flex-col flex-grow">
                                 <div class="flex items-center justify-between w-full">

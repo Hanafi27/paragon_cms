@@ -41,33 +41,55 @@
     <button onclick="closeAdminGalleryModal()" class="absolute right-4 top-4 bg-black/80 hover:bg-black/90 rounded-full p-2 transition-colors shadow-lg flex items-center justify-center z-20" style="width:36px;height:36px;" aria-label="Tutup">
         <svg class="w-6 h-6" fill="white" viewBox="0 0 24 24" stroke="white"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
     </button>
-    <div class="flex flex-col items-center justify-center w-full max-w-md">
-        <img id="admin-gallery-modal-img" src="" alt="" class="max-h-80 max-w-xs sm:max-w-sm w-auto object-contain rounded-xl shadow-xl mb-4 mx-auto block">
-        <div id="admin-gallery-modal-caption" class="text-center text-white font-semibold text-base mt-2"></div>
+    <div class="relative flex flex-col items-center justify-center w-full max-w-md pointer-events-none">
+        <button id="admin-gallery-modal-back" onclick="adminGalleryPrev()" class="absolute left-0 top-1/2 -translate-y-1/2 bg-black/80 hover:bg-black/90 rounded-full p-2 transition-colors shadow-lg flex items-center justify-center z-20 pointer-events-auto" style="width:36px;height:36px;" aria-label="Kembali">
+            <svg class="w-6 h-6" fill="white" viewBox="0 0 24 24" stroke="white"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg>
+        </button>
+        <button id="admin-gallery-modal-next" onclick="adminGalleryNext()" class="absolute right-0 top-1/2 -translate-y-1/2 bg-black/80 hover:bg-black/90 rounded-full p-2 transition-colors shadow-lg flex items-center justify-center z-20 pointer-events-auto" style="width:36px;height:36px;" aria-label="Selanjutnya">
+            <svg class="w-6 h-6" fill="white" viewBox="0 0 24 24" stroke="white"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
+        </button>
+        <img id="admin-gallery-modal-img" src="" alt="" class="max-h-80 max-w-xs sm:max-w-sm w-auto object-contain rounded-xl shadow-xl mb-4 mx-auto block pointer-events-auto">
+        <div id="admin-gallery-modal-caption" class="text-center text-white font-semibold text-base mt-2 pointer-events-auto"></div>
     </div>
 </div>
 
 <script>
-function openAdminGalleryModal(imgSrc, caption) {
-    const modal = document.getElementById('admin-gallery-modal');
-    const img = document.getElementById('admin-gallery-modal-img');
-    const cap = document.getElementById('admin-gallery-modal-caption');
-    img.src = imgSrc;
-    img.alt = caption;
-    cap.textContent = caption || 'Tanpa Keterangan';
-    modal.classList.remove('hidden', 'opacity-0');
-    modal.classList.add('flex', 'opacity-100');
-    document.body.style.overflow = 'hidden';
-}
-function closeAdminGalleryModal() {
-    const modal = document.getElementById('admin-gallery-modal');
-    modal.classList.remove('opacity-100');
-    modal.classList.add('opacity-0');
-    setTimeout(() => {
-        modal.classList.remove('flex');
-        modal.classList.add('hidden');
-        document.body.style.overflow = '';
-    }, 300);
-}
+    // Untuk navigasi gallery
+    let adminGalleryImages = @json($images);
+    let adminGalleryIndex = 0;
+    function openAdminGalleryModal(imgSrc, caption, index = null) {
+        const modal = document.getElementById('admin-gallery-modal');
+        const img = document.getElementById('admin-gallery-modal-img');
+        const cap = document.getElementById('admin-gallery-modal-caption');
+        img.src = imgSrc;
+        img.alt = caption;
+        cap.textContent = caption || 'Tanpa Keterangan';
+        modal.classList.remove('hidden', 'opacity-0');
+        modal.classList.add('flex', 'opacity-100');
+        document.body.style.overflow = 'hidden';
+        if(index !== null) adminGalleryIndex = index;
+    }
+    function closeAdminGalleryModal() {
+        const modal = document.getElementById('admin-gallery-modal');
+        modal.classList.remove('opacity-100');
+        modal.classList.add('opacity-0');
+        setTimeout(() => {
+            modal.classList.remove('flex');
+            modal.classList.add('hidden');
+            document.body.style.overflow = '';
+        }, 300);
+    }
+    function adminGalleryPrev() {
+        if(adminGalleryImages.length < 1) return;
+        adminGalleryIndex = (adminGalleryIndex - 1 + adminGalleryImages.length) % adminGalleryImages.length;
+        const img = adminGalleryImages[adminGalleryIndex];
+        openAdminGalleryModal("{{ asset('storage') }}/" + img.image_path, img.caption, adminGalleryIndex);
+    }
+    function adminGalleryNext() {
+        if(adminGalleryImages.length < 1) return;
+        adminGalleryIndex = (adminGalleryIndex + 1) % adminGalleryImages.length;
+        const img = adminGalleryImages[adminGalleryIndex];
+        openAdminGalleryModal("{{ asset('storage') }}/" + img.image_path, img.caption, adminGalleryIndex);
+    }
 </script>
 @endsection

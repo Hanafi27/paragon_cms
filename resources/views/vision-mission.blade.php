@@ -29,7 +29,7 @@
             <div class="absolute top-1/2 -left-32 w-72 h-72 bg-accent/4 rounded-full blur-3xl hidden sm:block"></div>
         </div>
         <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 animate-scale-in relative z-10">
-            <div class="bg-white rounded-2xl shadow-sm p-8 sm:p-12 text-center border border-neutral-border/50 relative overflow-hidden">
+            <div class="bg-white rounded-2xl shadow-sm p-8 sm:p-12 text-center border border-neutral-border/50 relative overflow-hidden mt-8">
                 {{-- Decorative Element --}}
                 <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-accent via-accent-light to-accent"></div>
                 

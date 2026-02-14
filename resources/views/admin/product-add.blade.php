@@ -33,7 +33,8 @@
                 </div>
                 <div>
                     <label class="block text-sm font-semibold mb-2">Stok</label>
-                    <input type="text" name="stock" class="w-full border border-slate-200 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#a81d5d] text-sm">
+                    <input type="number" name="stock" min="0" step="1" class="w-full border border-slate-200 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#a81d5d] text-sm" required id="stokInput" oninput="validateStokInput(this)">
+                    <div id="stokError" class="text-xs text-red-500 mt-1 hidden">Stok hanya boleh angka, tidak boleh huruf.</div>
                 </div>
                 <div>
                     <label class="block text-sm font-semibold mb-2">Sertifikasi</label>
@@ -81,6 +82,16 @@
     </form>
 </div>
 <script>
+        function validateStokInput(input) {
+            const errorDiv = document.getElementById('stokError');
+            // Cek jika ada karakter non-digit
+            if (/[^0-9]/.test(input.value)) {
+                errorDiv.classList.remove('hidden');
+                input.value = input.value.replace(/[^0-9]/g, '');
+            } else {
+                errorDiv.classList.add('hidden');
+            }
+        }
     function previewMainImage(event) {
         const input = event.target;
         const preview = document.getElementById('mainImagePreview');

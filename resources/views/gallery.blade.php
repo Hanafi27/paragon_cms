@@ -6,9 +6,9 @@
 
 @section('content')
 <section class="max-w-7xl mx-auto px-4 py-12 pt-20 md:pt-24 mt-6">
-    <h1 class="text-3xl md:text-4xl font-bold mb-2 text-center">Galeri Perusahaan</h1>
-    <p class="text-center text-neutral-600 mb-8 max-w-2xl mx-auto">Galeri ini menampilkan aktivitas kerja PT. Paragon Medika Pharma</p>
-    <div id="gallery-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6">
+    <h1 class="text-3xl md:text-4xl font-bold mb-2 text-center">Galeri Obat-obatan</h1>
+    <p class="text-center text-neutral-600 mb-8 max-w-2xl mx-auto">Kumpulan gambar produk dan kemasan obat-obatan PT. Paragon Medika Pharma.</p>
+    <div id="gallery-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
         @foreach($images as $idx => $img)
             <img src="{{ asset('storage/' . $img->image_path) }}" alt="{{ $img->caption }}"
                 class="w-full h-48 sm:h-56 md:h-64 object-cover rounded-xl cursor-pointer transition-transform duration-200 hover:scale-105"
@@ -28,11 +28,11 @@
     </button>
     <div class="flex flex-col items-center justify-center w-full max-w-md">
         <div class="relative w-full flex items-center justify-center">
-            <button id="gallery-prev" onclick="galleryPrev()" class="absolute left-0 top-1 z-30 text-white bg-black/30 hover:bg-black/60 rounded-full p-2 transition-colors" aria-label="Sebelumnya" style="display:none;">
+            <button id="gallery-prev" onclick="galleryPrev()" class="absolute left-0 top-1/2 -translate-y-1/2 z-30 text-white bg-black/30 hover:bg-black/60 rounded-full p-2 transition-colors" aria-label="Sebelumnya" style="display:none;">
                 <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg>
             </button>
-            <img id="gallery-modal-img" src="" alt="" class="max-h-80 max-w-xs sm:max-w-sm w-auto object-contain rounded-xl shadow-xl mb-4 mx-auto block">
-            <button id="gallery-next" onclick="galleryNext()" class="absolute right-0 top-1 z-30 text-white bg-black/30 hover:bg-black/60 rounded-full p-2 transition-colors" aria-label="Berikutnya" style="display:none;">
+            <img id="gallery-modal-img" src="" alt="" class="max-h-80 max-w-xs sm:max-w-sm w-auto object-contain mb-4 mx-auto block">
+            <button id="gallery-next" onclick="galleryNext()" class="absolute right-0 top-1/2 -translate-y-1/2 z-30 text-white bg-black/30 hover:bg-black/60 rounded-full p-2 transition-colors" aria-label="Berikutnya" style="display:none;">
                 <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
             </button>
         </div>
@@ -41,7 +41,7 @@
 </div>
 
 <script>
-const galleryData = @json($images);
+ const galleryData = @json($images);
 let currentIdx = 0;
 
 function openGalleryModal(idx) {

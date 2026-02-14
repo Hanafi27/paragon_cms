@@ -30,12 +30,13 @@
         </div>
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 animate-fade-up relative z-10">
             <div class="text-center mb-12">
-                <h2 class="font-heading text-3xl font-bold text-primary mb-4">Bagan Organisasi</h2>
+                <h2 class="font-heading text-3xl font-bold text-primary mb-4 mt-8">Bagan Organisasi</h2>
                 <p class="text-neutral">Alur koordinasi dan tanggung jawab PT Paragon Medika Pharma</p>
             </div>
             
             <div class="max-w-4xl mx-auto bg-white rounded-xl shadow-lg p-6 animate-fade-up" data-delay="100">
-                <div class="relative group cursor-pointer" data-lightbox-trigger data-image="{{ $organization->org_chart ?? '' }}" data-title="Bagan Struktur Organisasi">
+                <div class="relative group cursor-pointer mt-8" data-lightbox-trigger data-image="{{ $organization->org_chart ?? '' }}" data-title="Bagan Struktur Organisasi">
+                    <div class="mt-8"></div>
                     <img src="{{ $organization->org_chart ?? '' }}" 
                          alt="Struktur Organisasi" 
                          class="w-full h-auto object-contain rounded-lg transition-transform duration-300 hover:scale-105" />
