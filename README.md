@@ -69,13 +69,6 @@ Paragon adalah aplikasi web berbasis Laravel yang menyediakan dua role utama: Vi
 - Admin dapat mengubah username, password, dan foto profil di menu pengaturan.
 - Logout akan menghapus token dan mengakhiri sesi admin.
 
-## Production & Keamanan
-- Pastikan `.env` tidak diupload ke repo publik.
-- Gunakan HTTPS di production.
-- Set permission folder `storage` dan `bootstrap/cache` dengan benar.
-- Pastikan `APP_DEBUG=false` di production.
-- Update dependency secara berkala.
-
 ---
 
 Untuk pertanyaan lebih lanjut, silakan hubungi developer.
